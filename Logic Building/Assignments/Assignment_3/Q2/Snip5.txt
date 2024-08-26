@@ -1,0 +1,27 @@
+public class ConditionalLoopOutput { 
+ public static void main(String[] args) { 
+ int num = 1; 
+ for (int i = 1; i <= 4; i++) { 
+ if (i % 2 == 0) { 
+ num += i; 
+ } else { 
+ num -= i; 
+ } 
+ } 
+ System.out.println(num); 
+ } 
+} 
+
+at first i=1 so the value of num will get decremented so num=
+0
+now i=2 so the value of num will get incremented so num=
+2
+i=3 so the value of num will get decremented so num=
+-1
+i=4 so the value of num will get incremented so num=
+3
+
+
+
+the output will be
+3

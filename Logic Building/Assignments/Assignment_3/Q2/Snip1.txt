@@ -1,0 +1,19 @@
+public class NestedLoopOutput {
+ public static void main(String[] args) {
+ for (int i = 1; i <= 3; i++) {
+ for (int j = 1; j <= 2; j++) {
+ System.out.print(i + " " + j + " ");
+ }
+ System.out.println();
+ 
+ }
+ }
+ }
+ 
+ 
+ for the first step in i it will print 
+ 1 1 1 2 
+ for the second step it in i will print 
+ 2 1 2 2
+ for the third step it in i will print
+ 3 1 3 2

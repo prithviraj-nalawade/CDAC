@@ -1,0 +1,19 @@
+public class LoopIncrement { 
+ public static void main(String[] args) { 
+ int count = 0; 
+ for (int i = 0; i < 4; i++) { 
+ count += i++ - ++i; 
+ } 
+ System.out.println(count); 
+ } 
+} 
+
+first the i=0 the after 
+i++ i=1 and then after ++i i=2
+therefore count = -2
+now in for i++ so i=3
+therefore count = -2-2 = -4
+
+
+so the output will be:
+-4

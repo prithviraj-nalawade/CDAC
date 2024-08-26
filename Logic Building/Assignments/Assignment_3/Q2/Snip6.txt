@@ -1,0 +1,16 @@
+public class IncrementDecrement { 
+ public static void main(String[] args) { 
+ int x = 5; 
+ int y = ++x - x-- + --x + x++; 
+ System.out.println(y); 
+ } 
+}
+
+
+first ++x so x=6
+then x-- so x=5
+then --x so x=4
+then x++so x=5
+and y = 8
+the output will be:
+8

@@ -1,0 +1,28 @@
+public class DecrementingLoop {
+ public static void main(String[] args) {
+ int total = 0;
+ for (int i = 5; i > 0; i--) {
+ total += i;
+ if (i == 3) continue;
+ total -= 1;
+ }
+ System.out.println(total);
+ }
+} 
+
+for the first step in for loop the value of i =5 gets added to the
+total so total=5 in that the total will get -1 so the total equals 4   
+
+for the second step in for loop the value of i =4 gets added to the
+total so total=8 in that the total will get -1 so the total equals 7  
+
+for the third step in for loop the value of i =3 gets added to the
+total so total=10 in that the total will get -1 so the total equals 9  
+
+for the fourth step in for loop the value of i =2 gets added to the
+total so total=11 in that the total will get -1 so the total equals 10  
+
+for the fifth step in for loop the value of i =1 gets added to the
+total so total=12 in that the total will get -1 so the total equals 11  
+
+

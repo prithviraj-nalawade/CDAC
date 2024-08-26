@@ -1,0 +1,25 @@
+public class DoWhileLoop { 
+ public static void main(String[] args) { 
+ int i = 1; 
+ do { 
+ System.out.print(i + " "); 
+ i++; 
+ } while (i < 5); 
+ System.out.println(i); 
+ } 
+} 
+
+
+as do-while loop check the condition at least once so it will print the value of i which is
+1
+increment by 1 so 2<5 which is true then it will print 
+2
+increment by 1 so 3<5 which is true then it will print 
+3
+increment by 1 so 4<5 which is true then it will print 
+4
+increment by 1 so 5<5 which is false then it will break
+and then i=5
+
+the output will be
+1 2 3 4 5

@@ -1,0 +1,28 @@
+public class WhileLoopBreak { 
+ public static void main(String[] args) { 
+ int count = 0; 
+ while (count < 5) { 
+ System.out.print(count + " "); 
+ count++; 
+ if (count == 3) break; 
+ } 
+ System.out.println(count); 
+ } 
+}
+
+
+as 0<5 is true it will print
+0
+then increment by 1 of count 1<5 is true will print
+1
+then increment by 1 of count 2<5 is true will print
+2
+then increment by 1   
+but we have a break statement in if when count == 3 the loop is breaked
+and again it will print 
+3
+
+the output will be
+0 1 2 3 
+
+ 

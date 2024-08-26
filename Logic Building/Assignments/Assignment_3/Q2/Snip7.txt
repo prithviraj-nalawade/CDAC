@@ -1,0 +1,14 @@
+public class NestedIncrement { 
+ public static void main(String[] args) { 
+ int a = 10; 
+ int b = 5; 
+ int result = ++a * b-- - --a + b++; 
+ System.out.println(result); 
+ } 
+}
+first ++a so a=11
+then b-- so b=4
+then --a so a=10
+then b++ so b=5
+the output will be:
+49
