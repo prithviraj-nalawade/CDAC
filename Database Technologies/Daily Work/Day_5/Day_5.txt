@@ -1,0 +1,533 @@
+MySQL - SQL- List functions
+
+* independent of datatype
+
+Emp table:
+---------------------------
+create table emp(
+enamr varchar,
+sal, float, 
+comm
+);
+
+insert into emp 
+values('A', 5000, 500),('B', 6000, ),
+('C', , 700);
+
+select * from emp where comm = null;
+* any comparison done with null, returns null
+
+Pessimistic query-> searching for null values
+
+select * from emp where comm is null;
+Special Operator-> is null
+
+select * from emp where comm != null;
+* any comparison done with null, return null
+
+select * from emp where comm is not null;
+Special Operator-> is not null
+
+select 3*2; <- works in mysql, but is not ansi standard
+
+select sal+comm from empl
+5500
+.
+.
+*any operation done with null, returns null
+
+select sal + ifnull(comm, 0) from emp; if comm is null then 
+                                             return 0
+                                       else  
+                                             return comm
+                                       end if;
+5500
+6000
+.
+
+select  ifnull(sal, 0)+ifnull(comm, 0) from emp;
+5500
+6000
+700 
+
+ifnull(comm, 0)
+ifnull(comm, 100)
+ifnull(city, 'Mumbai')
+ifnull(orderdate, '2024-04-01')
+
+create table emp(
+sal float
+);
+
+insert into emp(1000),
+(2000),
+(3000),
+(4000),
+(5000);
+
+select greatest(sal, 3000) from sal;<- returns the greater of the two
+3000
+3000
+3000
+4000
+5000
+
+use:
+1. to set a lower limit on some value
+e.g.
+bonus = 10% sal, min bonus 300
+
+select greatest(sal*0.1, 300) from emp;
+
+select greatest(sal, 3000, 4000, 5000, 10000) from emp;
+greatest(val1, val2, val3, val4.....val255)
+greatest(col1, col2, col3, col4, .....col255)
+greatest('str1', 'str2', 'str3')
+greatest('date1', 'date2', 'date3')
+
+set x = greatest(a, b, c, d);
+
+select least(sal, 3000) from emp;<- returns the smaller of the two
+1000
+2000
+3000
+3000
+3000
+
+use:
+1. to set an upper limit on some value
+
+e.g.
+cashback = 10% amt, max cashback = 300
+
+select least(amt*0.1, 300) from orders;
+
+select least(sal, 3000, 4000, 5000, 10000) from emp;
+least(val1, val2, val3, val4.....val255)
+least(col1, col2, col3, col4, .....col255)
+least('str1', 'str2', 'str3')
+least('date1', 'date2', 'date3')
+
+set x = least(a, b, c, d);
+
+MySQL - SQL - CASE keyword:
+create table emp(
+sal float, 
+deptno int
+);
+
+insert into emp(1000, 10),
+(2000, 10),
+(3000, 20),
+(4000, 30),
+(5000, 40);
+
+select 
+case 
+when deptno =10 then 'Training'
+when deptno =20 then 'Exports'
+when deptno =30 then 'Marketing'
+else 'Others'
+end 'DEPTNAME'<- alias specification
+from emp; <- similar to switch statement
+
+DEPTNAME
+-----------------
+Training
+Training
+Exports
+Marketing
+Others
+
+* if you don't specify ELSE, and if DEPTNO 40 is present in table then it will returns null value
+	
+select 
+case 
+when deptno =10 then 'Ten'
+when deptno =20 then 'Twenty'
+when deptno =30 then 'Thirty'
+when deptno =40 then 'Forty'
+else 'Others'
+end 'DEPTNAME'<- alias specification
+from emp; <- similar to switch statement
+
+if deptno = 10 then HRA = 40% annual
+if deptno = 20 then HRA = 30% annual
+if deptno = 30 then HRA = 25% annual
+else HRA = 20% annual
+
+select deptno, ename, sal, sal*12 'ANNUAL' 
+case 
+when deptno =10 then sal*12*0.4
+when deptno =20 then sal*12*0.3
+when deptno =30 then sal*12*0.25
+else sal*12*0.2
+end 'HRA'
+from emp
+order by 1; 
+
+if sal<3000, Remark='Low Income'
+if sal=3000, Remark='Middle Income'
+if sal>3000, Remark='High Income'
+
+select ename, sal, 
+case 
+when sign(sal-3000)=1 then 'HIGH INCOME'
+when sign(sal-3000)=-1 then 'LOW INCOME'
+else 'MIDDLE INCOME'
+end 'REMARKS'
+from emp
+order by 2;
+
+MySQL - SQL - Environment functions
+
+select database() from dual;<- returns which database is selected;
+
+select user() from dual;<- returns username and machine
+
+show character set;
+
+MySQL - SQL- Group/Aggregate functions
+
+create table emp(
+empno int,
+ename varchar,
+sal float,
+deptno int,
+job varchar,
+mgr int
+);
+
+insert into emp(1, 'Arun', 8000, 1, M, 4),
+(2, 'Ali', 7000, 1, C, 1),
+(3, 'Kirun', 3000, 1, C, 1),
+(4, 'Jack', 9000, 2, M, ),
+(5, 'Thomas', 8000, 2, C, 4);
+
+Single row Functions:
+* operate on 1 row at a time
+* Character Number, Date and Time etc
+* e.g.upper(ename)
+
+Multi row functions:
+* operate on multiple rows at time
+* Group Functions
+* e.g. sum(sal)
+
+select sum(sal) from emp;
+O->35000
+
+* Assumption, 4th row SAL is null:-
+
+select sum(sal) from emp;<- Null values are not counted by GROUP Functions
+O-> 26000;
+
+* Assumption, 4th row SAL is null:-
+
+select avg(sal) from emp;<- Null values are not counted by GROUP Functions
+O->26000/4
+6500
+
+* Assumption, 4th row SAL is null:-
+
+select min(sal) from sal;
+O->3000
+
+select min(ifnull(sal,0)) from sal;
+O->0
+
+* Assumption, 4th row SAL is null:-
+
+select max(sal) from sal;
+O->8000
+
+select max(ifnull(sal,0)) from sal;
+O->0
+
+* Assumption, 4th row SAL is null:-
+
+select count(sal) from emp;<- return a no. of count of number of rows where sal is not having                               a null value 
+O->4
+
+select count(ifnull(sal,0)) from emp;
+O->5
+
+select count(*) from emp;<- returns all rows count
+O->5	
+
+select count(*) from emp;
+select count(sal) from emp;
+select count(*) - count(sal) from emp;
+
+select max(sal)/min(sal) from emp;
+8000/3000 ->2.67
+
+select sum(sal)/count(*) from emp;<- FASTER
+26000/5
+
+select avg(ifnull(sal, 0)) from emp;<- SLOW
+26000/5
+
+* Assumption 4th row sal is 9000:
+
+select sum(sal) from emp
+where deptno = 1;
+
+O->18000
+
+select avg(sal) from emp
+where job='C';
+O->6000
+
+Count-QUERY(counting the number of query hits):
+select count(*) from emp
+where sal>7000;
+O->3
+
+sum(column)
+min(column)   min(sal), min(ename)
+mav(column)   max(sal), max(ename)
+avg(column)  
+count(column) count(sal), count(ename)
+count(*)
+stddev(column)
+variance(column)
+
+SUMMARY REPORT:
+select count(*), min(sal), max(sal), sum(sal), avg(sal) from emp;
+
+Restriction #1:
+* you cannot select column of table along with a group function
+select count(ename), max(sal) from emp;//Ok
+
+select ename, max(sal) from emp;//Not Ok
+
+Restriction #2:
+* you cannot select a Single-row function along with a group function
+select count(ename), max(sal) from emp;//Ok
+
+select upper(ename), max(sal) from emp;//Not Ok
+
+Restriction #3:
+* you cannot use Group functions in the where clause
+select * from emp where sal>avg(sal);//Not Ok
+
+
+
+
+
+
+
+
+select deptno, sum(sal) from emp
+where sal>7000
+group by deptno;<- used to retrieve the rows
+
+* the WHERE clause is specified before the GROUP BY clause.
+
+select deptno, sum(sal) from emp
+where sal>7000 and sal<10000
+group by deptno;
+
+select deptno, sum(sal) from emp
+where job='C'
+group by deptno;
+
+select job, sum(sal) from emp
+group by deptno;<- error
+
+select deptno, job, sum(sal) from emp
+group by deptno, job;
+
+* no upper limit on the number of columns in GROUP BY clause
+* if you have large no. of rows in table, and if you have large nno. of columns in GROUP BY clause then your select statement will be very slow, because that much sorting has to take place in Server RAM.
+
+if you have 1 column in GROUP BY clause ->2d query
+if you have 2 column in GROUP BY clause ->3d query
+if you have 3 column in GROUP BY clause ->4d query
+etc
+known as Multi-dimensional queries(also known as Spatial queries)
+
+select job, deptno, sum(sal) from emp
+group by job, deptno;
+
+
+select ..................................
+group by city, country, district, state;   <-slow
+
+select...................................
+group by country, state, district, city; <- faster
+
+
+select sum(sal), deptno, job from emp
+group by job, deptno;
+
+* the position of columns in select clause, the position of column in GROUP BY clause need not be to be same
+* the position of columns in SELECT clause will determine the position of columns in the output; this you will write as per USer requirements
+* the position of columns in GROUP BY clause will determine the sorting order, group order, summation order, and hence the spped of processing; this you will write as per count(distinct(columnname))
+
+select count(distinct deptno), count(distinct job) from emp;
+
+select deptno, sum(sal) from emp
+group by deptno, job;
+
+select deptno, sum(sal) from emp
+group by deptno;
+
+deptno sum(sal)
+------ --------
+1	18000
+2	17000
+
+select deptno, sum(sal) from emp
+group by deptno 
+having sum(sal)>17000;
+
+deptno sum(sal)
+------ --------
+1	18000
+
+*  WHERE clause is used for searching, searching is taken place in SERVER HD
+*  WHERE clause is to restrict the rows
+* WHERE clause is used to retrieve the rows from DDB Server HD to Server RAM
+* HAVING clause workss AFTER the summation is done.
+
+
+select deptno, sum(sal) from emp
+where sal>7000
+group by deptno;
+ 
+select deptno, sum(sal) from emp
+group by deptno 
+having sal>7000;  <- ERROR
+
+deptno sum(sal)
+------ --------
+1	18000
+
+select deptno, sum(sal) from emp
+group by deptno
+having deptno = 1;
+
+* which ever column present in select clause, it can be used in HAVING clause.
+
+select deptno, sum(sal) from emp
+group by deptno
+having deptno = 1;<- will work but it is inefficient 
+
+* it is recommended that only the group functions should be used in having clause.
+
+select deptno, sum(sal) from emp
+group by deptno;
+
+deptno sum(sal)
+------ --------
+1	18000
+2	17000
+
+select deptno, sum(sal) from emp
+group by deptno 
+order by 2;
+
+deptno sum(sal)
+------ --------
+2	17000
+1	18000
+
+* ORDER BY clause is the LAST clause in the select statement
+
+select ........ from........
+where.........
+group by.........
+having.........
+order by..........
+
+MATRIX REPORT:
+select deptno, sum(sal), min(sal), max(sal), sum(sal) from emp
+group by deptno 
+order by 1;
+
+
+MySQL - SQL - JOINS(V.Imp)
+
+create table Dept(
+Deptno int,
+Dname varchar,
+loc varchar
+);
+
+insert into dept(1, 'TRN', 'BBY'),
+(2, 'EXP', 'DLH'),
+(3, 'MKTG', 'CAL');
+
+* all the data is not stored in on table, data is stored in multiple tables
+* if you want to see the colums of 2 or more tables, then you will have to write a join.
+
+dept->driving table
+emp->driven table
+                         <-------
+select dname, ename from emp, dept
+where dept.deptno = emp.deptno;
+
+* the position of columns in SELECT clause will determine the poition of columns in the output; this you will write as per client requirements 
+
+dept.deptno -> table.columnname
+emp.deptno -> table.columnname
+
+DNAME  ENAME
+-----  ------- 
+TRN	ARUN
+TRN	ALI
+TRN	KIRUN
+EXP	JACK
+EXP 	THOMAS
+
+select ename, dname from emp, dept 
+where dept.deptno = emp.deptno;
+
+select dname, ename from emp, dept 
+where emp.deptno = dept.deptno;
+
+*  WHERE clause can be written in any sequence
+
+select dname, ename from dept, emp 
+where emp.deptno = dept.deptno;<- slow
+
+select dname, ename emp, dept
+where dept.x = dept.y;
+
+* the common column in both the tables is deptno; the common column in the both the table, the columnname need not be the same in both the tables, because the same column may have a different meaning in the other table
+e.g EXPORT and IMPORT, PURCHASE and SALE, etc.
+
+select dname, ename emp, dept
+where dept.deptno = dept.empno;
+
+* the datatype of common column in both the tables should be the same and there has to be some logical reason on whose basis you are writing the join.
+
+* To make the output more presentable:
+
+select dname, ename from emp, dept 
+where dept.deptno = emp.deptno
+order by 1;
+
+* It's good to display losts of columns in the output; it becomes richer and more meaningful
+
+select dname, loc, ename, job, sal from emp, dept
+where dept.deptno = emp.deptno
+order by 1;
+
+* to display all the columns from both the tables
+
+select * from the emp, dept
+where dept.deptno = emp.deptno
+order by 1;
+
+* column ambiguously defined(if the common column had diff. column name in both the tables, then this problem would not been arisen)
+
+select deptno, dname, loc from emp, deptno
+where dept.deptno = emp.deptno
+order by 1;<-Error
+
+select dept.deptno, ename, loc, dname from emp, dept
+where dept.deptno = emp.deptno
+order by 1;

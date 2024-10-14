@@ -1,0 +1,367 @@
+MySQL-  Read and Write consistency:
+*  in a multiuser envirronment when yyou select from a table you can see ONLY commited data of    all users
+   plus/union 
+   changes made by you
+
+ACID properties in RDBMS:
+
+Atomicity
+* The entire transaction takes place at one or doesn't happens at all(eg. You withdraw     Rs.500/- from your Bank account...)
+Consistency
+* The databse mut be consistenet before and after the transaction.(eg. Same as above,   Deposits/Withdrawal and Balances tables)
+Isolation
+* multiple transaction occur independtly without interference
+Durability
+* the changes of a successful transaction are permanently, even if later the system failure   occurs
+
+OPTIMISTIC LOCKING:
+* Automatic row locking mechanism in MySQL
+* When you UPDATE or DELETE a row, that row is automatically locked for other users
+* row locking in MySQL is automatic
+* When you UPDATE or DELETE a row, that row becomes read-only for other users
+* Other users can SELECT from that table; they will view whole data "before" your changes
+* Other users can INSERT rows into that table
+* Other users can UPDATE or DELETE "other" rows from that table
+* No other user can UPDATE or DELETE you locked row till you have issued a Rollback or Commit 
+* LOCKS ARE AUTOMATICALLY RELEASEF WHEN YOU ROLLBACK OR COMMIT
+
+PESSIMISTIC LOCKING:-
+* Lock the rows manually in advance "BEFORE" issuing UPDATE or DELETE
+
+To lock the rows manually:
+
+* you have to use SELECT statement with the FOR UPDATE clause
+
+mysql>select * from emp
+      where empno =101
+      for update;
+
+mysql>select * from emp
+      where deptno =10
+      for update;   <- by default it will WAIT in the request queue till the row becomes 		       available
+
+mysql>select * from emp
+      where deptno =10
+      for update nowait;  <- if row is available lock it, else abort the operation
+                             (Error:ORA-00054)
+
+mysql>select * from emp
+      where deptno =10
+      for update wait 60; <-seconds if row is available lock it, wait in the Reequest for the                             specified time period; if roe is still unavailable, then abort the                             operation
+
+
+*  LOCKS ARE AUTOMATICALLY RELEASED WHEN YOU ROLLBACK OR COMMIT
+
+MySQL- SQL- Character Functions:
+
+create table emp(
+fname varchar(20),
+lname varchar(20)
+);
+
+Insert into emp('Arun', 'Purun'),
+('Tarun','Arun'),
+('Sirun', 'Kirun'),
+('Nutan', 'Purun');
+
+select fname, lname from emp;
+
+concat -> conatenate(to join)
+
+select concat(fname, lname) from emp;
+
+Output
+---------
+ArunPurun
+TarunArun
+
+uses
+-------------
+a. for presentation/ reporting purposes
+
+select concat(concat(fname, ' '), lname) from emp;(creates a blank space in between)
+
+* max upto 255 levels for functions within function
+ (this limit of SQL can be exceeded with help of Views)
+
+select upper(fname) from emp;
+
+ARUN
+TARUN
+SIRUN
+NUTAN
+
+use:
+a. fro presentation/reporting purpose
+
+update emp set fname = upper(fname);(for update the rows in table)
+update emp set fname = upper(fname) where .....;
+
+select lower(fname) from emp;
+
+arun
+tarun
+sirun
+nutan
+ 
+update emp set fname = lower(fname);(for update the rows in table)
+update emp set fname = lower(fname) where .....;
+
+
+create table emp(
+ename varchar(20)
+);
+
+Insert into emp values('Arun Purun'),
+('Tarun Arun'),
+('Sirun Kirun'),
+('Nutan Purun');
+
+select lpad(ename, 25, ' ') from emp; <- leftpad (right justified)
+select lpad(ename, 25, '*') from emp;
+
+output:
+                 Arun Purun
+*****************Arun Purun
+
+use:
+a. Right justification
+b. cheque printing
+
+select rpad(ename, 25, ' ') from emp; <- rightpad (left justified)
+select rpad(sal, 25, ' ') from emp;
+select rpad(ename, 25, '*') from emp;
+
+use:
+a. Left Justified for numeric data
+b. to convert varchar to char(convert length to fixed length)
+c. cheque printing
+d. center justification
+select lpad(rpad(ename, 25, '*'), 30, '*') from emp; <- puts * on both side
+
+select ltrim(ename)from emp;<- left trim removes blank space from left side.
+
+use:
+1. convert char to varchar
+
+***index starts from 1:
+select rtrim(ename)from emp;<- right trim removes blank space from right side.
+
+select trim(ename, 25)from emp;<-removes blank space from both side.
+
+select substr(ename,3) from emp;<- inclusive
+    3->starting point
+
+select substr(ename,3, 2) from emp;<- inclusive
+    3->starting point
+    2-> number of characters
+
+
+select substr(ename,-3) from emp;<- inclusive
+    -3->extract from right 
+
+use:
+1. extract part of a string
+
+
+select replace(ename,'un', 'xy') from emp;
+   un->xy
+
+select replace(ename,'un', 'xyz') from emp;
+    un->xyz
+
+select replace(ename,'un', 'x') from emp;
+    un->x
+
+select replace(ename,'un', '') from emp;
+    un->x
+
+use:
+P->Pune
+M->Mumbai
+
+Encryption/Decryption
+
+select instr(ename,'un') from emp;<- returns starting position(instring)
+
+3
+4
+4
+10
+0
+
+uses:
+1. used to check if one string exits in another one
+
+select length(ename) from emp;<-length of ename
+
+select ascii(ename) from emp;<-returns ascii value of 1st letter 
+
+select ascii('z') from emp;<- returns no. row times
+
+select distinct ascii('z') from emp; <- once (slow)
+
+use mysql;
+
+select distinct ascii('z') from user;
+
+select ascii('z') from dual;<-
+
+*  dual is system table it is automatically created when you install MySQL
+*  Common for RDBMS
+*  Dual contains only 1 row and 1 column
+*  Dual is a dummy table
+
+select substr('Navi Mumbai', 1, 3) from dual;
+
+select 3*12 from dual;
+
+select 'Welcome to CDAC Mumbai' as 'MESSAGE' from dual;
+
+select char(65 using utf8) from dual;
+
+--> utf8 is character set for US english, else the default is binary character set
+
+select * from emp 
+where soundex(ename) = soundex('Aruun');<- not very accurate
+
+MySQL - SQL - Number Functions:
+-----------------------------------
+
+create table Emp(
+sal float,
+);
+
+insert into emp values(1234.567),
+(1875.019),
+(1352.615),
+(1748.156);
+ 
+select round(sal) from emp;
+
+select round(sal, 1) from emp;
+1234.6
+1875
+1352.6
+1748.2
+
+select round(sal, -2) from emp;
+1200
+1900
+1400
+1700
+
+select truncate(sal, 0) from emp;
+1234
+1875
+1352
+1748
+
+use:
+1. Age calc
+2. time calc
+
+select truncate(sal, 1) from emp;
+
+select ceil(sal) from emp;<- if there is any value at all in the decimal, it will add 1 to the whole nnumber
+
+uses:
+1. Bill payments
+2. Interest payments
+3. Emi payments
+
+select floor(sal) from emp;<- removes decimals
+
+select sign(-15) from dual;<- returns sign of number
+
+use:
+a. check if no. is +ve or -ve
+b. sign(temperature)
+c. sign(blood_group)
+d. sign(sensex)
+e. sign(time1 - time2)
+f. sign(qty_in-stock)
+g. sign(dist1-dist2)
+h. sign(acceleration)
+i. sign(customertraffic)
+j. sign(velocity1-velocity2)
+k. sign(SP- CP) 
+l  to find the greater of 2 numbers;
+
+
+select mod(9, 5) from dual;<-remainder
+4
+
+select mod(8.22, 2.2) from dual;
+1.62
+
+select sqrt(81) from dual; <-only for +ve no.
+9
+
+select power(10, 3) from dual;<-exponential
+
+select power(10, 1/3) from dual;
+
+select abs(-10) from dual;
+10
+
+x->radians
+sin(x)
+cos(x)
+tan(x)
+
+-------------
+ln(y) -> log y to the base e;
+log(n,m)-> log m to the base n;
+
+------------------------------------------------
+MySQL - Date and Time Functions aand Formats:
+
+create table emp(
+hiredate date
+);
+
+insert into emp values('2023-10-15'),
+('2023-12-31'),
+('2024-01-15');
+
+select sysdate() from dual;<-returns DB Server machine date and time(when statement executed)
+
+select now() from dual;<-returns DB Server machine date and time(when statement began to execute)
+
+use:
+1. maintain logs of user actions/operations
+
+select adddate(sysdate(), 1) from dual;<-adding a 24hrs;
+
+select datediff(sysdate(), hiredate) from emp;<-difference between two dates
+
+select date_add(hiredate, interval 2 month) from emp;<-adds two months
+
+select date_add(hiredate, interval -2 month) from emp;<-substract two months
+
+select date_add(hiredate, interval 2 year) from emp;<-adds two years
+
+select date_add(hiredate, interval -2 year) from emp;<-substract two years
+
+select last_day('2024-10-11') from dual;<-
+use:
+a. attendence_calc
+b. Interest_calc
+
+select dayname() from dual;
+
+select dayname() from dual;
+
+
+
+
+
+
+
+
+
+
+
+
+
