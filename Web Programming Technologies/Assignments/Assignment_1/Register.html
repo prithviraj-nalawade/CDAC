@@ -1,0 +1,168 @@
+<html>
+
+<head>
+    <title>Register</title>
+    <style>
+        #container {
+            width: 1000px;
+            height: 1000px;
+            border: 1px black solid;
+            margin: 10px auto;
+            padding: 30px;
+            background-color: rgb(175, 175, 230);
+        }
+
+        label {
+            font-size: 20px;
+            font-family: sans-serif;
+        }
+
+        .input {
+            width: 350px;
+            height: 40px;
+            margin-left: 130px;
+            font-size: 20px;
+        }
+
+        label {
+            float: left;
+            width: 150px;
+            font-size: 23px;
+        }
+
+        textarea {
+            width: 350px;
+            height: 72px;
+            margin-left: 130px;
+            font-size: 20px;
+        }
+
+        #gen {
+            width: 20px;
+            height: 20px;
+
+        }
+
+        .gen {
+
+            margin-left: 130px;
+        }
+
+        table {
+            width: 800px;
+            font-size: 30px;
+            margin-left: 30px;
+            margin-top: 10px;
+            text-align: left;
+            padding: 3px;
+        }
+
+        thead {
+            background-color: rgb(122, 122, 255);
+        }
+
+
+        #tinput {
+            width: 220px;
+            height: 40px;
+            font-size: 20px;
+
+        }
+
+        #submit {
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+            margin-left: 450px;
+            margin-top: 5px;
+            border-radius: 20px;
+            background-color: white;
+            border: 0;
+            transition: background-color 0.5s;
+
+        }
+
+        #submit:hover {
+            background-color: rgb(184, 252, 252);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+
+        <form action="" method="">
+            <label>First name</label>
+            <input type="text" class="input"><br><br>
+            <label>Last name</label>
+            <input type="text" class="input"><br><br>
+            <label>Date of birth</label>
+            <input type="date" class="input"><br><br>
+            <label>Email</label>
+            <input type="email" class="input"><br><br>
+            <label>Mobile no. 1</label>
+            <input type="number" class="input"><br><br>
+            <label>Mobile no. 2</label>
+            <input type="number" class="input"><br><br>
+            <label>Gender</label>
+            <label class="gen"><input type="radio" id="gen" name="gender">Male</label>
+            <label class="gen" style="margin-left: 250px;"><input type="radio" id="gen"
+                    name="gender">Female</label><br><br><br>
+            <label>Address</label>
+            <textarea type="text"></textarea><br><br>
+            <label>State</label>
+            <select class="input">
+                <option>Maharashtra</option>
+                <option>Madhya Pradesh</option>
+                <option>Rajasthan</option>
+            </select><br><br>
+            <label>City</label>
+            <select class="input">
+                <option>Kolhapur</option>
+                <option>Bhopal</option>
+                <option>Jaipur</option>
+            </select><br><br>
+            <label>Pin Code</label>
+            <input type="number" class="input"><br><br>
+            <label>Education</label>
+            <table cellspacing="10" cellpadding="5">
+                <thead>
+                    <tr>
+                        <td>Education</td>
+                        <td>College</td>
+                        <td>Year of Passing</td>
+                        <td>Percentage</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>X</td>
+                        <td><input type="text" id="tinput"></td>
+                        <td><input type="text" id="tinput"></td>
+                        <td><input type="text" id="tinput"></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>XII</td>
+                        <td><input type="text" id="tinput"></td>
+                        <td><input type="text" id="tinput"></td>
+                        <td><input type="text" id="tinput"></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td>GRADUATION </td>
+                        <td><input type="text" id="tinput"></td>
+                        <td><input type="text" id="tinput"></td>
+                        <td><input type="text" id="tinput"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" id="submit" value="Register">
+
+        </form>
+    </div>
+</body>
+
+</html>
