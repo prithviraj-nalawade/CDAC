@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="populateTable()">Fetch Data</button>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Phone</th>
+        </thead>
+        <tbody id="row-container">
+
+        </tbody>
+    </table>
+
+    <script>
+        function populateTable() {
+            var usersData = [{
+                id: 111,
+                name: 'Sohan',
+                age: 26,
+                gender: 'male',
+                phone: 98384348
+
+            },
+            {
+                id: 112,
+                name: 'Rohan',
+                age: 25,
+                gender: 'male',
+                phone: 98343848
+
+            },
+            {
+                id: 113,
+                name: 'Mohan',
+                age: 22,
+                gender: 'male',
+                phone: 98323848
+
+            },
+            {
+                id: 115,
+                name: 'Priya',
+                age: 22,
+                gender: 'female',
+                phone: 2383848
+
+            },
+            {
+                id: 118,
+                name: 'Roshni',
+                age: 27,
+                gender: 'female',
+                phone: 983438
+
+            }];
+
+            usersData.forEach((user) => {
+                const { id, name, age, gender, phone } = user;
+                var tableRow = document.createElement('tr');
+                var idColumn = document.createElement('td');
+                var nameColumn = document.createElement('td');
+                var ageColumn = document.createElement('td');
+                var genderColumn = document.createElement('td');
+                var phoneColumn = document.createElement('td');
+
+                idColumn.innerHTML = id;
+                nameColumn.innerHTML = name;
+                ageColumn.innerHTML = age;
+                genderColumn.innerHTML = gender;
+                phoneColumn.innerHTML = phone;
+
+                tableRow.appendChild(idColumn);
+                tableRow.appendChild(nameColumn);
+                tableRow.appendChild(ageColumn);
+                tableRow.appendChild(genderColumn);
+                tableRow.appendChild(phoneColumn);
+
+                document.getElementById('row-container').appendChild(tableRow)
+            })
+
+
+
+        }   
+    </script>
+</body>
+
+</html>

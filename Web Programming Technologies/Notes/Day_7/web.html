@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form action="https://www.google.com" onsubmit="return validate()">
+        <input type="text" placeholder="Enter name" id="name" onkeyup="validateField('name', 'nameError', 'Name is Required')">
+        <span id="nameError" class="error"></span>
+
+        <br><br>
+        <input type="text" placeholder="Enter email" id="email" onkeyup="validateField('email', 'emailError', 'Email is Required')">
+        <span id="emailError" class="error"></span>
+        <br><br>
+
+        <input type="password" placeholder="Enter password" id="password">
+        <span id="passError" class="error"></span>
+        <br><br>
+        <input type="text" placeholder="Confirm password" id="confirm-password">
+        <br><br>
+        <select id="qualification">
+            <option  value="">-----Select Qualification</option>
+            <option value="Btech">Btech</option>
+            <option value="Mtech">Mtech</option>
+            <option value="bsc">BSC</option>
+            </select>
+            <br><br>
+            <input type="radio"  name="gender" id="maleRb" checked><label>Male</label>
+            <input type="radio" name="gender" id="femaleRb"><label>Female</label>
+            <br><br>
+            <input type="checkbox" id="termCb" onchange="validate()"><label>I accept terms and conditions</label><br><br>
+            <span id="termError" class="error"></span>
+        <button id="btn" type="submit">Register</button>
+       
+        </form>
+        <script>
+            function validate(){
+               var name = document.getElementById("name").value;
+               var email = document.getElementById("email").value;
+               var pass = document.getElementById("password").value;
+               var passRegex = /regex/;
+               var term = document.getElementById("termCb");
+               var isValid = true; 
+               if(name.length === 0){
+                    document.getElementById("nameError").innerHTML = "Name is Required";
+                    isValid = false;
+               }else{
+                document.getElementById("nameError").innerHTML = "";
+               }
+
+               if(email.length === 0){
+                    document.getElementById("emailError").innerHTML = "Email is Required";
+                    isValid = false;
+               }else{
+                document.getElementById("emailError").innerHTML = "";
+               }
+
+               if(pass.length === 0){
+                    document.getElementById("passError").innerHTML = "Password is Required";
+                    isValid = false;
+               }else if(!passRegex.test(pass)){
+                document.getElementById("passError").innerHTML = "Password is Required";
+                isValid = false;
+               }
+               else{
+                document.getElementById("passError").innerHTML = "";
+               }
+
+               if(!term.checked){
+                document.getElementById("termError").innerHTML = "Please Accept Terms and Condition";
+               }else{
+                document.getElementById("termError").innerHTML = "";
+               }
+               return isValid;
+            }
+
+            
+            
+            function validateField(fieldId, errorElementId, validationMessage){
+                var value = document.getElementById(fieldId).value;
+                if(value.length === 0){
+                    document.getElementById(errorElementId).innerHTML = validationMessage;
+               }else{
+                document.getElementById(errorElementId).innerHTML = "";
+               }
+            }
+        </script>
+</body>
+</html>
