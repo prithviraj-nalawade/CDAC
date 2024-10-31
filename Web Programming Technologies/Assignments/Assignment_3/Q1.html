@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <title>
+        Question 1
+    </title>
+    <style>
+        body {
+            text-align: center;
+            font-size: 300%;
+        }
+
+        button {
+            font-size: 100%;
+            background-color: rgb(159, 239, 239);
+            border: 0;
+            color: black;
+            transition: color 0.4s;
+        }
+
+        button:hover{
+            background-color: rgb(159, 239, 239);
+            color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, commodi officia! Enim illo dolorem aperiam,
+        fugiat nulla hic nobis accusantium nam illum placeat sapiente quas reiciendis velit unde provident rerum et
+        maxime. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat fugit laboriosam alias odio aperiam
+        adipisci libero corrupti ea. Perferendis ad impedit et debitis numquam iste laudantium quo necessitatibus harum
+        nihil sunt dolores, facere quos, at voluptatibus sed similique cupiditate, qui amet eius ratione. Doloremque,
+        nemo sunt esse, est nobis assumenda quibusdam et repudiandae voluptates architecto dolore provident, officia
+        excepturi. Velit reprehenderit harum nisi placeat omnis ad ducimus! Nulla harum possimus dolores voluptate
+        perferendis nobis fugiat nostrum ab rem ut ipsum, exercitationem, rerum maxime ducimus qui! Itaque veritatis
+        quia iusto iure, facere expedita alias dignissimos magnam quidem facilis, ab, tenetur impedit.</p>
+    <button id="btn">Change</button>
+
+    <script>
+        var btn = document.getElementById("btn");
+        console.log(btn);
+        btn.addEventListener("click", ()=>{
+           var p = document.getElementsByTagName("p");
+           p[0].style.color = "orange";
+           p[0].style.fontFamily = "Times New Roman";
+           p[0].style.fontSize = "110%";
+           document.body.style.backgroundColor = "black";
+            
+        });
+        
+    </script>
+</body>
+
+</html>

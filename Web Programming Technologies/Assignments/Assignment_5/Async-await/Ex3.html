@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <title>Ex3</title>
+</head>
+
+<body>
+    <script>
+        function fetchFast() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Fast Done");
+
+                }, 2000);
+            })
+        }
+
+        function fetchSlow() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Slow Done");
+
+                }, 6000);
+            })
+        }
+        var dat = new Date();
+
+        async function check() {
+            var fast = fetchFast();
+            console.log(fast);
+            var slow = fetchSlow();
+            console.log(slow);
+            var res = await Promise.all([fast, slow]);
+            console.log(res);
+            var dat1 = new Date();
+            console.log(dat1 - dat)
+        }
+        check();
+
+        console.log("Complete!!")
+    </script>
+</body>
+
+</html>

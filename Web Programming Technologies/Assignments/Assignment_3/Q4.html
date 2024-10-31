@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>
+        Question 4
+    </title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        div {
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 40px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi blanditiis praesentium illo provident eos
+        ea laboriosam. Laboriosam fugiat rem pariatur facere esse, sunt nulla expedita nihil hic sint doloribus!</div>
+    <p><span>Lorem</span> ipsum dolor sit amet consectetur, adipisicing elit. Vitae cumque ipsam magni in, error impedit
+        temporibus fuga corporis odit. Ut veritatis consectetur fugit id rem incidunt? Enim <span>nostroum</span> error
+        architecto, officiis, perferendis esse veritatis <span>necessitatibus</span> odio, cum deserunt nemo neque
+        possimus quod minus dolores. Eligendi possimus, repudiandae libero alias eos unde placeat quia modi est neque
+        perferendis adipisci facere ipsa vel fugit amet id fuga consequuntur ab, magni cum? Inventore itaque sunt fugits
+        <span>cupiditate</span> optio, laboriosam ab eos obcaecati porro ut repudiandae at minus aspernatur accusamus
+        aperiam praesentium fuga dolore neque quia commodi. Accusantium iure, eius dolorum quo modi molestias.
+    </p>
+    <script>
+        var div = document.getElementsByTagName("div");
+        var spa = document.getElementsByTagName("span");
+        div[0].addEventListener('mouseover', () => {
+            for (i = 0; i < spa.length; i++) {
+                spa[i].style.color = 'red';
+            }
+        })
+        div[0].addEventListener('mouseout', () => {
+            for (i = 0; i < spa.length; i++) {
+                spa[i].style.color = 'black';
+            }
+        })
+    </script>
+</body>
+
+</html>

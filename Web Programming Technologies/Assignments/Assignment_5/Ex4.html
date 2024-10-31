@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Ex4</title>
+    </head>
+    <body>
+        <script>
+            const myPromise = new Promise((resolve, reject)=>{
+                setTimeout(()=>{
+                    resolve({data: "Hello friend", error:null});
+                }, 5000)
+            });
+
+            myPromise.then((val)=>{
+                console.log(val);
+
+                return new Promise((resolve, reject)=>{
+                    setTimeout(()=>{
+                        resolve("First Promise chain complete")
+                    }, 2000);
+                })
+            }).then((val)=>{
+                console.log(val);
+            })
+
+            myPromise.then((val)=>{
+                console.log(val);
+
+                return new Promise((resolve, reject)=>{
+                    setTimeout(()=>{
+                        resolve("Second promis chain complete")
+                    }, 10000);
+                });
+            })
+            .then((val)=>{
+                console.log(val);
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <title>Ex3</title>
+
+</head>
+
+<body>
+    <script>
+        function fetchData(url, func) {
+            setTimeout(()=>{
+                var res = 'Response from '+url;
+                func(res);
+            }, 2000);
+        }
+        url = "http://www.google.com/humans.txt"
+        fetchData(url, (res)=>{
+            console.log(res);
+        })
+    </script>
+</body>
+
+</html>

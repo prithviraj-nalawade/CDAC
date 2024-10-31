@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <title>Ex1</title>
+</head>
+
+<body>
+    <script>
+        function fetchPokemon() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    //resolve({ data: "Psyduck", power: 100 });
+                    reject("Error")
+                }, 2000);
+            });
+        }
+
+        console.log("Program starting-up....")
+
+        async function getPokemon(){
+            try{
+            var data = await fetchPokemon();
+            console.log(data);
+            }catch(err){
+                console.log(err)
+            }
+        }
+
+        getPokemon();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Ex5</title>
+    </head>
+    <body>
+        <script>
+            function fetchData(url, func){
+                setTimeout(()=>{
+                    var err = false;
+                    if(err){
+                        func("Error Occured", null);
+                    }else{
+                        var res = "Response from "+url;
+                        func(null, res);
+                    }
+                }, 2000)
+            }
+
+            function processData(data, func){
+                setTimeout(()=>{
+                    var pdata = "A String added to "+data;
+                    func(pdata)
+                }, 1000)
+            }
+            url = "http://www.google.com/humans.txt"
+            fetchData(url, (err, res)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(res);
+                    processData(res, (dat)=>{
+                        console.log(dat);  
+                    })
+                }
+            });
+        </script>
+    </body>
+</html>

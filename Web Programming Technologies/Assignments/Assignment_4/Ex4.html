@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Ex4</title>
+    </head>
+    <body>
+        <script>
+            function fetchData(url, func){
+                setTimeout(()=>{
+                    var err = true;
+                    if(err){
+                        func("Error Occured", null);
+                    }else{
+                        var res = "Response from "+url;
+                        func(null, res);
+                    }
+                }, 2000)
+            }
+            url = "http://www.google.com/humans.txt"
+            fetchData(url, (err, res)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(res);
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Ex2</title>
+    </head>
+    <body>
+        <script>
+            function fetchUser(){
+                return new Promise((resolve, reject)=>{
+                    setTimeout(()=>{
+                        resolve({data:{user:"Monkey", admin:true}})
+                    }, 3000);
+                });
+            }
+
+            function login(obj){
+                if(obj.data.admin === true){
+                    console.log("Successful to Login");
+                }else{
+                    console.log("Failed to Login");
+                }
+            }
+
+            async function check(){
+                var data = await fetchUser();
+
+                login(data);
+
+            }
+
+            check();
+        </script>
+    </body>
+</html>

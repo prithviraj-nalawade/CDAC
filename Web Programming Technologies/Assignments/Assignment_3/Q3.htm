@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>
+            Question 3
+        </title>
+        <style>
+            select{
+                font-size: 30px;
+            }
+            button{
+                font-size: 30px;
+                margin-left: 5px;                
+            }
+        </style>
+    </head>
+    <body>
+        <select>
+            <option value="Kolhapur">Kolhapur</option>
+            <option value="Sangli">Sangli</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Pune">Pune</option>
+        </select>
+        <button>Remove</button>
+        <script>
+            var button = document.getElementsByTagName("button");
+            button[0].onclick = ()=>{
+            var select = document.getElementsByTagName("select");
+            select[0].remove(select[0].selectedIndex);
+            }
+        </script>
+    </body>
+</html>

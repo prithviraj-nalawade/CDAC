@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>
+            Ex2
+        </title>
+    </head>
+    <body>
+        <script>
+           console.log("Program started");
+           
+           const myPromise = new Promise((resolve, reject)=>{
+                setTimeout(()=>{
+                    resolve("Program Completed");
+                }, 3000);
+
+                setTimeout(()=>{
+                    reject("Program failure");
+                }, 2000)
+           });   
+
+           console.log(myPromise);
+           console.log("Program in progress....")
+
+           myPromise
+           .then((val)=>{
+            console.log(val);
+           })
+           .catch((err)=>{
+            console.log(err);
+           })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>
+        Question 2
+    </title>
+    <style>
+        input{
+            font-size: 30px;
+            margin: 2% 40%;
+        }
+
+        button{
+            font-size: 30px;
+            margin: 2% 40%;
+            
+        }
+        p{
+            font-size: 30px;
+            margin: 2% 40%;
+        }
+    </style>
+</head>
+
+<body>
+    <form >
+<input type="text" id="firstname" placeholder="Enter First Name"><br>
+
+<input type="text" id="lastname" placeholder="Enter Last Name"><br>
+<input type="number" maxlength="10" id="con" placeholder="Enter Contact number"><br>
+<input type="email" id="mail" placeholder="Enter email"><br>
+<button>Submit</button>
+</form>
+<p>No Text to Submit</p>
+<script>
+    var button = document.getElementsByTagName("button");
+    
+    button[0].onclick = ()=>{
+        event.preventDefault();
+        var firstname = document.getElementById("firstname").value;
+    var lastname = document.getElementById("lastname").value;
+    var con = document.getElementById("con").value;
+    var mail = document.getElementById("mail").value;
+    var para = document.getElementsByTagName("p");
+        para[0].innerHTML = "FirstName:"+firstname+"\nLastName:"+lastname+"\nContactNo.:"+con+"\nEmail:"+mail;
+    }
+</script>
+</body>
+
+</html>
