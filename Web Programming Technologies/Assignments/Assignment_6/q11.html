@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function func(callback){
+            setTimeout(()=>{
+                callback();
+            }, 3000)
+        }
+
+        func(()=>{
+            console.log("After 3 seconds");
+        })
+    </script>
+</body>
+</html>

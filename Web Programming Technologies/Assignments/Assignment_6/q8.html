@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+     myCart = [{ id: 200, name: "toothpaste", price: 50, quantity: 2 },
+        { id: 101, name: "soap", price: 30, quantity: 4 },
+        { id: 105, name: "toothbrush", price: 20, quantity: 3 },
+        { id: 102, name: "perfume", price: 250, quantity: 2 }
+        ]
+
+        const totalPrice = myCart.reduce((i, j)=>{
+            return i + (j.price*j.quantity);
+        }, 0)
+
+        console.log(totalPrice);
+   </script>  
+</body>
+</html>
